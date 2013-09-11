@@ -14,7 +14,7 @@ import com.formation.jee.domain.Computer;
 import com.formation.jee.service.ComputerService;
 import com.formation.jee.service.manager.ServiceManager;
 
-@WebServlet("/ComputerServlet")
+@WebServlet("/ComputerList")
 public class ComputerController extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
@@ -42,15 +42,16 @@ public class ComputerController extends HttpServlet{
 	/**
 	 * La methode doPost est executee lorsqu'un client poste des informations (en general formulaire) sur l'URI UserServlet
 	 */
-//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		String name = request.getParameter("name");
-//		
-//		//Test de validite des champs login et password
-//		if(name != null && !name.isEmpty() )
-//			computerService.create(new Computer.Builder().name(name).build());
-//		
-//		//Redirection vers la page
-//		doGet(request, response);
-//	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String name = request.getParameter("name");
+		String introducedDate = request.getParameter("introducedDate");
+		
+		//Test de validite des champs login et password
+		if(name != null && !name.isEmpty() )
+			computerService.create(new Computer.Builder().name(name).build());
+		
+		//Redirection vers la page
+		doGet(request, response);
+	}
 
 }
