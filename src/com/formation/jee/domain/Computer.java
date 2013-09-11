@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -16,7 +18,7 @@ public class Computer {
 
 	@Id
 	@GeneratedValue
-	private int id;
+	private long id;
 
 	@Column(name = "name")
 	private String name;
@@ -26,19 +28,23 @@ public class Computer {
 
 	@Column(name = "discontinued")
 	private Date discontinued;
-
-	@Column(name = "company_id")
-	private Integer company_id;
+	
+	@ManyToOne
+	@JoinColumn(name="company_id", referencedColumnName="id")
+	protected Company company;
+	
+//	@Column(name = "company_id")
+//	private Integer company_id;
 
 	public Computer() {
 
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -66,15 +72,15 @@ public class Computer {
 		this.discontinued = discontinued;
 	}
 
-	public Integer getCompany_id() {
-		return company_id;
-	}
+//	public Integer getCompany_id() {
+//		return company_id;
+//	}
 
-	public void setCompany_id(Integer company_id) {
-
-		this.company_id = company_id;
-
-	}
+//	public void setCompany_id(Integer company_id) {
+//
+//		this.company_id = company_id;
+//
+//	}
 
 	public static class Builder {
 		private Computer computer;
@@ -83,7 +89,7 @@ public class Computer {
 			computer = new Computer();
 		}
 
-		public Builder id(int id) {
+		public Builder id(long id) {
 			computer.setId(id);
 			return this;
 		}
@@ -103,10 +109,10 @@ public class Computer {
 			return this;
 		}
 
-		public Builder company_id(Integer company_id) {
-			computer.setCompany_id(company_id);
-			return this;
-		}
+//		public Builder company_id(Integer company_id) {
+//			computer.setCompany_id(company_id);
+//			return this;
+//		}
 
 		public Computer build() {
 			return computer;
@@ -117,7 +123,15 @@ public class Computer {
 	public String toString() {
 		return "Computer [id=" + id + ", name=" + name + ", introduced="
 				+ introduced + ", discontinued=" + discontinued
-				+ ", company_id=" + company_id + "]";
+				+ ", company_name=" + company.getName() + "]";
+	}
+
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
 	}
 
 }
