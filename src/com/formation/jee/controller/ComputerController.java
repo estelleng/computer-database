@@ -2,6 +2,7 @@ package com.formation.jee.controller;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -44,6 +45,7 @@ public class ComputerController extends HttpServlet{
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String name = request.getParameter("name");
+		SimpleDateFormat sdf;
 		String introducedDate = request.getParameter("introducedDate");
 		
 		//Test de validite des champs login et password

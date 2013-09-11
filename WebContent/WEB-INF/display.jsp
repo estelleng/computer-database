@@ -26,11 +26,11 @@
 		<table class="computers zebra-striped">
 			<thead>
 				<tr>
-					<th>id</th>
-					<th>name</th>
-					<th>introduced</th>
-					<th>discontinued</th>
-					<th>company name</th>
+					<th>Id</th>
+					<th>Nom</th>
+					<th>Date de mise en vente</th>
+					<th>Date de retrait de la vente</th>
+					<th>Marque</th>
 				</tr>
 			</thead>
 			<tbody>
