@@ -19,7 +19,7 @@
 				placeholder="Search name"> <input type="submit"
 				id="searchsubmit" value="Filter by name" class="btn primary">
 		</form>
-		<a class="btn success" id="add" href="addComputer.jsp">Add
+		<a class="btn success" id="add" href="NewComputer">Add
 			Computer</a>
 	</div>
 	<form action="ComputerServlet" method="POST">
@@ -43,7 +43,7 @@
 						<td>${computer.company.name}</td>
 					</tr>
 				</c:forEach>
-				<tr>
+				<!-- <tr>
 
 					<td><input type="submit" value="+" /></td>
 					<td><input type="text" name="name"
@@ -54,7 +54,7 @@
 						placeholder="Date de fin de mise en vente..." /></td>
 					<td><input type="text" name="company"
 						placeholder="marque de l'ordinateur..." /></td>
-				</tr>
+				</tr> -->
 			</tbody>
 		</table>
 	</form>

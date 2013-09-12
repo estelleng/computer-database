@@ -2,6 +2,7 @@ package com.formation.jee.controller;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
@@ -33,7 +34,7 @@ public class ComputerController extends HttpServlet{
 	 * La methode doGet est executee lorsqu'un client execute l'URI UserServlet
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Envoyer un objet dans la requete (ici la liste d'utilisateurs)
+		//Envoyer un objet dans la requete 
 		request.setAttribute("computers", computerService.getComputers());
 		
 		RequestDispatcher rd = getServletContext().getRequestDispatcher(response.encodeURL("/WEB-INF/display.jsp"));
@@ -44,16 +45,12 @@ public class ComputerController extends HttpServlet{
 	 * La methode doPost est executee lorsqu'un client poste des informations (en general formulaire) sur l'URI UserServlet
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String name = request.getParameter("name");
-		SimpleDateFormat sdf;
-		String introducedDate = request.getParameter("introducedDate");
+
 		
-		//Test de validite des champs login et password
-		if(name != null && !name.isEmpty() )
-			computerService.create(new Computer.Builder().name(name).build());
+		
 		
 		//Redirection vers la page
-		doGet(request, response);
+		//doGet(request, response);
 	}
 
 }
