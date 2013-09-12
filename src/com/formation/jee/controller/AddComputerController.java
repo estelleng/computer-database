@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.formation.jee.domain.Company;
 import com.formation.jee.domain.Computer;
 import com.formation.jee.service.CompanyService;
 import com.formation.jee.service.ComputerService;
@@ -39,7 +40,6 @@ public class AddComputerController extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// Envoyer un objet dans la requete 
-		request.setAttribute("computers", computerService.getComputers());
 		request.setAttribute("companies", companyService.getCompanies());
 
 		RequestDispatcher rd = getServletContext().getRequestDispatcher(
@@ -88,20 +88,29 @@ public class AddComputerController extends HttpServlet {
 
 
 
-		//String company_name = request.getParameter("company");
+		String company_id = request.getParameter("company_id");
+		long companyId= Long.parseLong(company_id);
+		
+		System.out.println("company id  "+company_id);
 
 		// Test de validite des champs login et password
 		if (name != null && !name.isEmpty()){
+			Company company= new Company();
+			company= companyService.getCompany(companyId);
+			
+			
 			computerService.create(new Computer.Builder().name(name).
 					introduced(introduced).discontinued(discontinued).
-					build());
+					company(company).build());
 			
 		}
-				
+		
+		
 		
 
 		// Redirection vers la page
-		doGet(request, response);
+		//doGet(request, response);
+		response.sendRedirect("ComputerList");
 	}
 
 }

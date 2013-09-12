@@ -31,6 +31,8 @@ public class ComputerController extends HttpServlet{
     }
 
 	/**
+	 * @author estelle
+	 * 
 	 * La methode doGet est executee lorsqu'un client execute l'URI UserServlet
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

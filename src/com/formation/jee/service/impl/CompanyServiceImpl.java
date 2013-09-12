@@ -24,6 +24,10 @@ public class CompanyServiceImpl implements CompanyService {
 		return companyDao.getCompanies();
 	}
 
+	@Override
+	public Company getCompany(long companyId) {
+		return companyDao.getCompany(companyId);
+	}
 	
 	/* (non-Javadoc)
 	 * @see com.formation.jee.service.impl.CompanyService#create(com.formation.jee.domain.Company)

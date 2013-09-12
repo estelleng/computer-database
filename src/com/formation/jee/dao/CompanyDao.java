@@ -10,4 +10,6 @@ public interface CompanyDao {
 
 	public abstract void create(Company company);
 
+	Company getCompany(long companyId);
+
 }

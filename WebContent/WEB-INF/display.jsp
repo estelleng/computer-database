@@ -43,18 +43,7 @@
 						<td>${computer.company.name}</td>
 					</tr>
 				</c:forEach>
-				<!-- <tr>
-
-					<td><input type="submit" value="+" /></td>
-					<td><input type="text" name="name"
-						placeholder="Nom d'ordinateur..." /></td>
-					<td><input type="text" name="name"
-						placeholder="Date de mise en vente..." /></td>
-					<td><input type="text" name="name"
-						placeholder="Date de fin de mise en vente..." /></td>
-					<td><input type="text" name="company"
-						placeholder="marque de l'ordinateur..." /></td>
-				</tr> -->
+				
 			</tbody>
 		</table>
 	</form>

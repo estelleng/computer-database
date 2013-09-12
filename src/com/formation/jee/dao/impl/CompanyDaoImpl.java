@@ -39,6 +39,30 @@ public CompanyDaoImpl(){
 		return companies;
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	public Company getCompany(long companyId){
+		EntityManager em = null;
+		
+		Company company = null;
+		
+		try {
+			em = DaoManager.INSTANCE.getEntityManager();
+			//Ici on appelle la namedQuery declaree en annotation dans la classe domain.User
+			System.out.println("coucou !!");
+			company = (Company) em.createNamedQuery("findCompany").setParameter("company_id",companyId).getSingleResult();
+			System.out.println("company name  "+company.getName());
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(em != null)
+				em.close();
+		}
+		return company;
+		
+		
+	}
+	
 	/* (non-Javadoc)
 	 * @see com.formation.jee.dao.impl.CompanyDao#create(com.formation.jee.domain.Company)
 	 */

@@ -4,12 +4,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "company")
-@NamedQuery(name = "findAllCompanies", query = "Select c From Company c")
+@NamedQueries({
+@NamedQuery(name = "findAllCompanies", query = "Select c From Company c"),
+@NamedQuery(name = "findCompany", query = "Select c From Company c WHERE c.id= company_id"),
+})
+
 public class Company {
 
 	@Id
@@ -38,6 +43,8 @@ public class Company {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	
 
 	public static class Builder {
 		private Company company;

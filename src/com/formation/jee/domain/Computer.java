@@ -72,15 +72,6 @@ public class Computer {
 		this.discontinued = discontinued;
 	}
 
-//	public Integer getCompany_id() {
-//		return company_id;
-//	}
-
-//	public void setCompany_id(Integer company_id) {
-//
-//		this.company_id = company_id;
-//
-//	}
 
 	public static class Builder {
 		private Computer computer;
@@ -109,10 +100,10 @@ public class Computer {
 			return this;
 		}
 
-//		public Builder company_id(Integer company_id) {
-//			computer.setCompany_id(company_id);
-//			return this;
-//		}
+		public Builder company(Company company) {
+			computer.setCompany(company);
+			return this;
+		}
 
 		public Computer build() {
 			return computer;

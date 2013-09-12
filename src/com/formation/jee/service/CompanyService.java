@@ -10,4 +10,8 @@ public interface CompanyService {
 
 	public abstract void create(Company company);
 
+	Company getCompany(long companyId);
+
+	
+
 }
