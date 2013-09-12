@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Table(name = "company")
 @NamedQueries({
 @NamedQuery(name = "findAllCompanies", query = "Select c From Company c"),
-@NamedQuery(name = "findCompany", query = "Select c From Company c WHERE c.id= company_id"),
+@NamedQuery(name = "findCompany", query = "Select c From Company c WHERE c.id= :id"),
 })
 
 public class Company {
