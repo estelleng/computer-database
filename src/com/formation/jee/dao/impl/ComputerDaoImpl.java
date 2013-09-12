@@ -3,6 +3,7 @@ package com.formation.jee.dao.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import com.formation.jee.dao.ComputerDao;
 import com.formation.jee.dao.manager.DaoManager;
@@ -19,14 +20,22 @@ public class ComputerDaoImpl implements ComputerDao {
 	public List<Computer> getComputers() {
 
 		EntityManager em = null;
-
+		int nbElementsPage = 25;
+		int pageNumber=0;
 		List<Computer> computers = null;
 
 		try {
 			em = DaoManager.INSTANCE.getEntityManager();
 			//Ici on appelle la namedQuery declaree en annotation dans la classe domain.User
 			String query = "Select c From Computer c";
-			computers = em.createQuery(query).getResultList();
+			
+			Query requete = em.createQuery(query);
+			
+			requete.setFirstResult(pageNumber*nbElementsPage);
+			requete.setMaxResults((pageNumber+1)*nbElementsPage);
+			computers = requete.getResultList();
+			
+			//computers = em.createQuery(query).getResultList();
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
