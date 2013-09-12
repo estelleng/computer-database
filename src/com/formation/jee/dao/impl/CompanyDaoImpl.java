@@ -39,7 +39,6 @@ public CompanyDaoImpl(){
 		return companies;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public Company getCompany(long companyId){
 		EntityManager em = null;
@@ -50,8 +49,8 @@ public CompanyDaoImpl(){
 			em = DaoManager.INSTANCE.getEntityManager();
 			//Ici on appelle la namedQuery declaree en annotation dans la classe domain.User
 			System.out.println("coucou !!");
-			company = (Company) em.createNamedQuery("findCompany").setParameter("company_id",companyId).getSingleResult();
-			System.out.println("company name  "+company.getName());
+			company = (Company) em.createNamedQuery("findCompany").setParameter("id",companyId).getSingleResult();
+			System.out.println("requete OK  !!!!!");
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {

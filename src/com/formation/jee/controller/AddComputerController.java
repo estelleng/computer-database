@@ -91,7 +91,7 @@ public class AddComputerController extends HttpServlet {
 		String company_id = request.getParameter("company_id");
 		long companyId= Long.parseLong(company_id);
 		
-		System.out.println("company id  "+company_id);
+		System.out.println("company id  "+companyId);
 
 		// Test de validite des champs login et password
 		if (name != null && !name.isEmpty()){
