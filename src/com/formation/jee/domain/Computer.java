@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -13,7 +14,10 @@ import java.util.Date;
 
 @Entity
 @Table(name = "computer")
-@NamedQuery(name = "findAllComputers", query = "Select c From Computer c")
+@NamedQueries({
+		@NamedQuery(name = "findAllComputers", query = "Select c From Computer c"),
+		@NamedQuery(name = "findComputersResearch", query = "Select c From Computer c WHERE c.name LIKE"
+				+ ":name"), })
 public class Computer {
 
 	@Id
@@ -28,13 +32,13 @@ public class Computer {
 
 	@Column(name = "discontinued")
 	private Date discontinued;
-	
+
 	@ManyToOne
-	@JoinColumn(name="company_id", referencedColumnName="id")
+	@JoinColumn(name = "company_id", referencedColumnName = "id")
 	protected Company company;
-	
-//	@Column(name = "company_id")
-//	private Integer company_id;
+
+	// @Column(name = "company_id")
+	// private Integer company_id;
 
 	public Computer() {
 
@@ -71,7 +75,6 @@ public class Computer {
 	public void setDiscontinued(Date discontinued) {
 		this.discontinued = discontinued;
 	}
-
 
 	public static class Builder {
 		private Computer computer;

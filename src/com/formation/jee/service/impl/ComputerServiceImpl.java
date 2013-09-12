@@ -26,4 +26,10 @@ public class ComputerServiceImpl implements ComputerService {
 	public void create(Computer computer) {
 		computerDao.create(computer);
 	}
+
+
+	@Override
+	public List<Computer> getComputersResearch(String filter) {
+		return computerDao.getComputersResearch(filter);
+	}
 }

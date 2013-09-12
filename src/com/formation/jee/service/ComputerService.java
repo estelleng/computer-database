@@ -7,6 +7,7 @@ import com.formation.jee.domain.Computer;
 public interface ComputerService {
 
 	public abstract List<Computer> getComputers();
+	public abstract List<Computer> getComputersResearch(String valeurCherchee);
 
 	public abstract void create(Computer computer);
 

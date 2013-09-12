@@ -35,16 +35,16 @@ public class AddComputerController extends HttpServlet {
 	}
 
 	/**
-	 * La methode doGet est executee lorsqu'un client execute l'URI UserServlet
+	 * La methode doGet est executee lorsqu'un client execute l'URI
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// Envoyer un objet dans la requete 
+		// Envoyer un objet dans la requete
 		request.setAttribute("companies", companyService.getCompanies());
 
 		RequestDispatcher rd = getServletContext().getRequestDispatcher(
 				response.encodeURL("/WEB-INF/addComputer.jsp"));
-		
+
 		rd.forward(request, response);
 	}
 
@@ -55,13 +55,11 @@ public class AddComputerController extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String name = request.getParameter("name");
-		
+
 		System.out.println("nom" + name);
-		
+
 		SimpleDateFormat sdf = null;
 		sdf = new SimpleDateFormat("yyyy-mm-dd");
-		
-		
 
 		String introducedDate = request.getParameter("introducedDate");
 		Date introduced = null;
@@ -71,11 +69,11 @@ public class AddComputerController extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("date "+introducedDate);
-		
+		System.out.println("date " + introducedDate);
+
 		SimpleDateFormat sdf2 = null;
 		sdf2 = new SimpleDateFormat("yyyy-mm-dd");
-		
+
 		String discontinuedDate = request.getParameter("discontinuedDate");
 		Date discontinued = null;
 		try {
@@ -84,32 +82,25 @@ public class AddComputerController extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("date "+discontinuedDate);
-
-
+		System.out.println("date " + discontinuedDate);
 
 		String company_id = request.getParameter("company_id");
-		long companyId= Long.parseLong(company_id);
-		
-		System.out.println("company id  "+company_id);
+		long companyId = Long.parseLong(company_id);
+
+		System.out.println("company id  " + company_id);
 
 		// Test de validite des champs login et password
-		if (name != null && !name.isEmpty()){
-			Company company= new Company();
-			company= companyService.getCompany(companyId);
-			
-			
-			computerService.create(new Computer.Builder().name(name).
-					introduced(introduced).discontinued(discontinued).
-					company(company).build());
-			
-		}
-		
-		
-		
+		if (name != null && !name.isEmpty()) {
+			Company company = new Company();
+			company = companyService.getCompany(companyId);
 
-		// Redirection vers la page
-		//doGet(request, response);
+			computerService.create(new Computer.Builder().name(name)
+					.introduced(introduced).discontinued(discontinued)
+					.company(company).build());
+
+		}
+
+		// Redirection vers la page qui liste les ordinateurs
 		response.sendRedirect("ComputerList");
 	}
 
