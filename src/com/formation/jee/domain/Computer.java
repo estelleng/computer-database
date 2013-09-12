@@ -6,18 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "computer")
-@NamedQueries({
-		@NamedQuery(name = "findAllComputers", query = "Select c From Computer c"),
-		@NamedQuery(name = "findComputersResearch", query = "Select c From Computer c WHERE c.name LIKE"
-				+ ":name"), })
 public class Computer {
 
 	@Id

@@ -25,7 +25,8 @@ public class ComputerDaoImpl implements ComputerDao {
 		try {
 			em = DaoManager.INSTANCE.getEntityManager();
 			//Ici on appelle la namedQuery declaree en annotation dans la classe domain.User
-			computers = em.createNamedQuery("findAllComputers").getResultList();
+			String query = "Select c From Computer c";
+			computers = em.createQuery(query).getResultList();
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -67,7 +68,8 @@ public class ComputerDaoImpl implements ComputerDao {
 		try {
 			em = DaoManager.INSTANCE.getEntityManager();
 			//Ici on appelle la namedQuery declaree en annotation dans la classe domain.User
-			computersResearch = em.createNamedQuery("findComputersResearch").setParameter("name", "%"+filter+"%").getResultList();
+			String query= "Select c From Computer c WHERE c.name LIKE :name";
+			computersResearch = em.createQuery(query).setParameter("name", "%"+filter+"%").getResultList();
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
