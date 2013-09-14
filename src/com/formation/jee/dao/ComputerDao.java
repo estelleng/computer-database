@@ -11,5 +11,10 @@ public interface ComputerDao {
 	void create(Computer computer);
 
 	List<Computer> getComputersResearch(String valeurCherchee);
+	
+	Computer getComputer(long computerId);
+	
+	void deleteComputer(Computer computer);
+	
 
 }

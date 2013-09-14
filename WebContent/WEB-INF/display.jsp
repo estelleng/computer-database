@@ -21,6 +21,9 @@
 		</form>
 		<a class="btn success" id="add" href="NewComputer">Add
 			Computer</a>
+			
+		<a class="btn success" id="delete" href="DeleteComputer">Delete
+			Computer</a>	
 	</div>
 	<form action="ComputerServlet" method="POST">
 		<table class="computers zebra-striped">
