@@ -18,20 +18,22 @@ import com.formation.jee.service.CompanyService;
 import com.formation.jee.service.ComputerService;
 import com.formation.jee.service.manager.ServiceManager;
 
-@WebServlet("/NewComputer")
-public class AddComputerController extends HttpServlet {
+@WebServlet("/EditComputer")
+public class EditComputerController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private ComputerService computerService;
 	private CompanyService companyService;
+	private ComputerService computerService;
+
+	private String computer_id = null;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public AddComputerController() {
+	public EditComputerController() {
 		super();
-		computerService = ServiceManager.INSTANCE.getComputerService();
 		companyService = ServiceManager.INSTANCE.getCompanyService();
+		computerService = ServiceManager.INSTANCE.getComputerService();
 	}
 
 	/**
@@ -42,8 +44,15 @@ public class AddComputerController extends HttpServlet {
 		// Envoyer un objet dans la requete
 		request.setAttribute("companies", companyService.getCompanies());
 
+		computer_id = request.getParameter("id");
+		long computerId = Long.parseLong(computer_id);
+
+		Computer computer = new Computer();
+		computer = computerService.getComputer(computerId);
+		request.setAttribute("computer", computer);
+
 		RequestDispatcher rd = getServletContext().getRequestDispatcher(
-				response.encodeURL("/WEB-INF/addComputer.jsp"));
+				response.encodeURL("/WEB-INF/editComputer.jsp"));
 
 		rd.forward(request, response);
 	}
@@ -54,8 +63,10 @@ public class AddComputerController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		String name = request.getParameter("name");
 
+		long computerId = Long.parseLong(computer_id);
+
+		String name = request.getParameter("name");
 
 		SimpleDateFormat sdf = null;
 		sdf = new SimpleDateFormat("yyyy-mm-dd");
@@ -88,14 +99,16 @@ public class AddComputerController extends HttpServlet {
 			Company company = new Company();
 			company = companyService.getCompany(companyId);
 
-			computerService.create(new Computer.Builder().name(name)
-					.introduced(introduced).discontinued(discontinued)
-					.company(company).build());
+			Computer computer = computerService.getComputer(computerId);
+			computer.setName(name);
+			computer.setIntroduced(introduced);
+			computer.setDiscontinued(discontinued);
+			computer.setCompany(company);
 
+			computerService.editComputer(computer);
 		}
 
 		// Redirection vers la page qui liste les ordinateurs
 		response.sendRedirect("ComputerList");
 	}
-
 }

@@ -16,7 +16,11 @@ public interface ComputerDao {
 	
 	void deleteComputer(Computer computer);
 
+
 	List<Computer> getComputersPages(int nbElements, int currentPage);
+
+	void editComputer(Computer computer);
+
 	
 
 }

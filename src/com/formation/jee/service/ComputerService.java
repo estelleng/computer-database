@@ -15,6 +15,8 @@ public interface ComputerService {
 	public abstract void create(Computer computer);
 
 	public void deleteComputer(Computer computer);
+	
+	public void editComputer(Computer computer);
 
 	public abstract List<Computer> getComputersPages(int nbElements, int currentPage);
 

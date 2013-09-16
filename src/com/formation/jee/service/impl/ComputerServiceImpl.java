@@ -27,15 +27,20 @@ public class ComputerServiceImpl implements ComputerService {
 		computerDao.create(computer);
 	}
 
+	@Override
 	public void deleteComputer(Computer computer){
 		computerDao.deleteComputer(computer);
+	}
+	
+	@Override
+	public void editComputer(Computer computer){
+		computerDao.editComputer(computer);
 	}
 
 	@Override
 	public List<Computer> getComputersResearch(String filter) {
 		return computerDao.getComputersResearch(filter);
 	}
-
 
 	@Override
 	public Computer getComputer(long computerId) {

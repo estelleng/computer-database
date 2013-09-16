@@ -38,7 +38,10 @@
 				<c:forEach items="${requestScope.computers}" var="computer">
 					<tr>
 						<td>${computer.id}</td>
-						<td>${computer.name}</td>
+						<td><a
+							href="<c:url value="EditComputer?id=${computer.id}" />"
+							onclick="">${computer.name}</a></td>
+
 						<td>${computer.introduced}</td>
 						<td>${computer.discontinued}</td>
 						<td>${computer.company.name}</td>
