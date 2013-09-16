@@ -19,11 +19,9 @@
 				placeholder="Search name"> <input type="submit"
 				id="searchsubmit" value="Filter by name" class="btn primary">
 		</form>
-		<a class="btn success" id="add" href="NewComputer">Add
+		<a class="btn success" id="add" href="NewComputer">Add Computer</a> <a
+			class="btn success" id="delete" href="DeleteComputer">Delete
 			Computer</a>
-			
-		<a class="btn success" id="delete" href="DeleteComputer">Delete
-			Computer</a>	
 	</div>
 	<form action="ComputerServlet" method="POST">
 		<table class="computers zebra-striped">
@@ -40,13 +38,16 @@
 				<c:forEach items="${requestScope.computers}" var="computer">
 					<tr>
 						<td>${computer.id}</td>
-						<td>${computer.name}</td>
+						<td><a
+							href="<c:url value="EditComputer?id=${computer.id}" />"
+							onclick="">${computer.name}</a></td>
+
 						<td>${computer.introduced}</td>
 						<td>${computer.discontinued}</td>
 						<td>${computer.company.name}</td>
 					</tr>
 				</c:forEach>
-				
+
 			</tbody>
 		</table>
 	</form>

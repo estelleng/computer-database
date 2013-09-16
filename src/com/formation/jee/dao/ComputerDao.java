@@ -15,6 +15,8 @@ public interface ComputerDao {
 	Computer getComputer(long computerId);
 	
 	void deleteComputer(Computer computer);
+
+	void editComputer(Computer computer);
 	
 
 }
