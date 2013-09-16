@@ -134,4 +134,43 @@ public class ComputerDaoImpl implements ComputerDao {
 		return computer;
 		
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Computer> getComputersPages(int nbElements, int currentPage) {
+		
+		EntityManager em = null;
+
+		List<Computer> computers = null;
+
+		try {
+			em = DaoManager.INSTANCE.getEntityManager();
+			
+			String query = "Select c From Computer c";
+			
+			Query requete = em.createQuery(query);
+			
+			if (currentPage == 1){
+				requete.setFirstResult(currentPage-1);
+				requete.setMaxResults(nbElements-1);
+				
+			}
+			else {
+				
+				requete.setFirstResult((currentPage-1)*nbElements - 1);
+				requete.setMaxResults(nbElements);
+
+			}
+			
+			computers = requete.getResultList();
+
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(em != null)
+				em.close();
+		}
+		return computers;	
+
+	}
 }

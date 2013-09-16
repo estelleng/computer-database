@@ -42,4 +42,10 @@ public class ComputerServiceImpl implements ComputerService {
 		// TODO Auto-generated method stub
 		return computerDao.getComputer(computerId);
 	}
+
+
+	@Override
+	public List<Computer> getComputersPages(int nbElements, int currentPage) {
+		return computerDao.getComputersPages(nbElements, currentPage);
+	}
 }

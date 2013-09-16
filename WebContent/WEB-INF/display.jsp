@@ -19,11 +19,9 @@
 				placeholder="Search name"> <input type="submit"
 				id="searchsubmit" value="Filter by name" class="btn primary">
 		</form>
-		<a class="btn success" id="add" href="NewComputer">Add
+		<a class="btn success" id="add" href="NewComputer">Add Computer</a> <a
+			class="btn success" id="delete" href="DeleteComputer">Delete
 			Computer</a>
-			
-		<a class="btn success" id="delete" href="DeleteComputer">Delete
-			Computer</a>	
 	</div>
 	<form action="ComputerServlet" method="POST">
 		<table class="computers zebra-striped">
@@ -46,11 +44,13 @@
 						<td>${computer.company.name}</td>
 					</tr>
 				</c:forEach>
-				
+
 			</tbody>
 		</table>
 	</form>
-	</section>
+	<jsp:element name="page">${nPage}</jsp:element>
+
+		<a href="ComputerList?page=${nPage+1}">Next</a></section>
 </body>
 <jsp:include page="../include/footer.jsp" />
 </html>

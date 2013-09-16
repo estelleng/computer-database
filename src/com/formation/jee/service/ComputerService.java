@@ -16,4 +16,6 @@ public interface ComputerService {
 
 	public void deleteComputer(Computer computer);
 
+	public abstract List<Computer> getComputersPages(int nbElements, int currentPage);
+
 }
