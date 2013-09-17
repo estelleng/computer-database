@@ -20,4 +20,6 @@ public interface ComputerService {
 
 	public abstract List<Computer> getComputersPages(int nbElements, int currentPage);
 
+	public abstract int getComputerCount();
+
 }

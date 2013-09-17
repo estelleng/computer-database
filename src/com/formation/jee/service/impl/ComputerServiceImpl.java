@@ -53,4 +53,11 @@ public class ComputerServiceImpl implements ComputerService {
 	public List<Computer> getComputersPages(int nbElements, int currentPage) {
 		return computerDao.getComputersPages(nbElements, currentPage);
 	}
+
+
+	@Override
+	public int getComputerCount() {
+		
+		return computerDao.getComputerCount();
+	}
 }
