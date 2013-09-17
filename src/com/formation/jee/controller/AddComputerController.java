@@ -95,7 +95,7 @@ public class AddComputerController extends HttpServlet {
 		}
 
 		// Redirection vers la page qui liste les ordinateurs
-		response.sendRedirect("ComputerList");
+		response.sendRedirect("ComputerList?page=1");
 	}
 
 }

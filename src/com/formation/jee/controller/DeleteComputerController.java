@@ -56,7 +56,7 @@ public class DeleteComputerController extends HttpServlet {
 		computerService.deleteComputer(computer);
 
 		// Redirection vers la page qui liste les ordinateurs
-		response.sendRedirect("ComputerList");
+		response.sendRedirect("ComputerList?page=1");
 	}
 
 }

@@ -185,7 +185,7 @@ public class ComputerDaoImpl implements ComputerDao {
 			
 			if (currentPage == 1){
 				requete.setFirstResult(currentPage-1);
-				requete.setMaxResults(nbElements-1);
+				requete.setMaxResults(nbElements);
 				
 			}
 			else {
