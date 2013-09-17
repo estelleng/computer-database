@@ -48,24 +48,29 @@ public class AddComputerController extends HttpServlet {
 		rd.forward(request, response);
 	}
 
-	/**
-	 * La methode doPost est executee lorsqu'un client poste des informations
-	 * (en general formulaire) sur l'URI UserServlet
-	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+
+		boolean validation = true;
 		String name = request.getParameter("name");
 
+		// Si aucun nom n'a été saisi, ou s'il est vide (ne contient que des
+		// espaces)
+		if (name == null || name.trim().isEmpty()) {
+			// alors la saisie n'est pas valide
+			validation = false;
+		}
 
 		SimpleDateFormat sdf = null;
 		sdf = new SimpleDateFormat("yyyy-mm-dd");
+		sdf.setLenient(false);
 
 		String introducedDate = request.getParameter("introducedDate");
 		Date introduced = null;
 		try {
 			introduced = (Date) sdf.parse(introducedDate);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+			validation = false;
 			e.printStackTrace();
 		}
 
@@ -74,28 +79,30 @@ public class AddComputerController extends HttpServlet {
 		try {
 			discontinued = (Date) sdf.parse(discontinuedDate);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+			validation = false;
 			e.printStackTrace();
 		}
 
 		String company_id = request.getParameter("company_id");
 		long companyId = Long.parseLong(company_id);
 
-		System.out.println("company id  " + company_id);
-
 		// Test de validite des champs login et password
-		if (name != null && !name.isEmpty()) {
+		if (validation) {
 			Company company = new Company();
 			company = companyService.getCompany(companyId);
 
 			computerService.create(new Computer.Builder().name(name)
 					.introduced(introduced).discontinued(discontinued)
 					.company(company).build());
+			// Redirection vers la page qui liste les ordinateurs
+			response.sendRedirect("ComputerList?page=1");
 
 		}
+		// si un des champs a été mal rempli, l'utilisateur est redirigé vers la
+		// page d'ajout d'un ordinateur.
+		else
+			response.sendRedirect("NewComputer");
 
-		// Redirection vers la page qui liste les ordinateurs
-		response.sendRedirect("ComputerList?page=1");
 	}
 
 }

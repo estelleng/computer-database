@@ -65,37 +65,45 @@ public class EditComputerController extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		long computerId = Long.parseLong(computer_id);
+		boolean validation = true;
 
 		String name = request.getParameter("name");
+		
+		// Si aucun nom n'a été saisi, ou s'il est vide (ne contient que des espaces)
+		if (name == null || name.trim().isEmpty()) {
+			//alors la saisie n'est pas valide
+			validation = false;
+		}
 
 		SimpleDateFormat sdf = null;
 		sdf = new SimpleDateFormat("yyyy-mm-dd");
+		sdf.setLenient(false);
 
 		String introducedDate = request.getParameter("introducedDate");
 		Date introduced = null;
 		try {
 			introduced = (Date) sdf.parse(introducedDate);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+			validation = false;
 			e.printStackTrace();
 		}
+		
 
 		String discontinuedDate = request.getParameter("discontinuedDate");
 		Date discontinued = null;
 		try {
 			discontinued = (Date) sdf.parse(discontinuedDate);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+			validation = false;
 			e.printStackTrace();
 		}
 
 		String company_id = request.getParameter("company_id");
 		long companyId = Long.parseLong(company_id);
 
-		System.out.println("company id  " + company_id);
 
-		// Test de validite des champs login et password
-		if (name != null && !name.isEmpty()) {
+		// Si les champs ont été correctement remplis
+		if (validation) {
 			Company company = new Company();
 			company = companyService.getCompany(companyId);
 
@@ -106,9 +114,15 @@ public class EditComputerController extends HttpServlet {
 			computer.setCompany(company);
 
 			computerService.editComputer(computer);
+			
+			// Redirection vers la page qui liste les ordinateurs
+			response.sendRedirect("ComputerList?page=1");
 		}
+		
+		//si un des champs a été ma rempli, l'utilisateur est redirigé vers la page d'édition 
+		//de l'ordinateur.
+		else response.sendRedirect("EditComputer?id="+ computerId);
 
-		// Redirection vers la page qui liste les ordinateurs
-		response.sendRedirect("ComputerList?page=1");
+		
 	}
 }

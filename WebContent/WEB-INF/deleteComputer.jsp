@@ -27,7 +27,7 @@
 		</fieldset>
 		<div class="actions">
 			<input type="submit" value="Delete" class="btn primary"> or <a
-				href="ComputerList" class="btn">Cancel</a>
+				href="ComputerList?page=1" class="btn">Cancel</a>
 		</div>
 	</form>
 </section>

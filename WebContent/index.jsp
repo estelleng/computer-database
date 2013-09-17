@@ -1,3 +1,3 @@
 <%
-response.sendRedirect("ComputerList");
+response.sendRedirect("ComputerList?page=1");
 %>
