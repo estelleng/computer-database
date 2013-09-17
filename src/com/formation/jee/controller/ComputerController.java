@@ -58,6 +58,7 @@ public class ComputerController extends HttpServlet {
 			request.setAttribute("computers",
 					computerService.getComputersPages(nbElements, currentPage));
 			request.setAttribute("nPage", currentPage);
+			request.setAttribute("computers_count", computerService.getComputerCount());
 			
 			RequestDispatcher rd = getServletContext().getRequestDispatcher(
 					response.encodeURL("/WEB-INF/display.jsp"));

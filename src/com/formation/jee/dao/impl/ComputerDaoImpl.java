@@ -206,4 +206,31 @@ public class ComputerDaoImpl implements ComputerDao {
 		return computers;	
 
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public int getComputerCount() {
+		
+		EntityManager em = null;
+
+		int count = 0;
+
+		try {
+			em = DaoManager.INSTANCE.getEntityManager();
+			
+			String query = "Select c From Computer c";
+			
+			Query requete = em.createQuery(query);
+			
+			count = requete.getResultList().size();
+
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(em != null)
+				em.close();
+		}
+		return count;	
+
+	}
 }

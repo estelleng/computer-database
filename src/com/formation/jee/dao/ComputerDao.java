@@ -21,6 +21,8 @@ public interface ComputerDao {
 
 	void editComputer(Computer computer);
 
+	int getComputerCount();
+
 	
 
 }

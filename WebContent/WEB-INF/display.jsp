@@ -12,7 +12,7 @@
 <body>
 
 	<section id="main">
-	<h1>Computer List</h1>
+	<h1> ${requestScope.computers_count} Computers Found</h1>
 	<div id="actions">
 		<form action="" method="GET">
 			<input type="search" id="searchbox" name="search" value=""
