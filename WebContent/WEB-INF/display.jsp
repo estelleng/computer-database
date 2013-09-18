@@ -12,7 +12,7 @@
 <body>
 
 	<section id="main">
-	<h1> ${requestScope.computers_count} Computers Found</h1>
+	<h1>${requestScope.computers_count} Computers Found</h1>
 	<div id="actions">
 		<form action="" method="GET">
 			<input type="search" id="searchbox" name="search" value=""
@@ -51,22 +51,25 @@
 			</tbody>
 		</table>
 	</form>
-	<c:if test="${nPage-1 != 0}" >
-	
-		<a href="ComputerList?page=${nPage-1}">Précédent</a>
-		
-	</c:if>
+	<ul class="pagination">
+		<c:if test="${nPage-1 != 0}">
 
-	
- <jsp:element name="page">${nPage}</jsp:element> 
- 
- 	<c:if test="${nPage+1 <= nbPages}" >
-	
-		<a href="ComputerList?page=${nPage+1}">Suivant</a>
-		
-	</c:if>
+			<li><a href="ComputerList?page=${nPage-1}">Précédent</a></li>
 
-		</section>
+		</c:if>
+
+		<li><a href="ComputerList?page=${nPage}">${nPage}</a></li>
+
+		<c:if test="${nPage+1 <= nbPages}">
+
+			<li><a href="ComputerList?page=${nPage+1}">Suivant</a></li>
+
+
+		</c:if>
+	</ul>
+
+
+	</section>
 </body>
 <jsp:include page="../include/footer.jsp" />
 </html>
