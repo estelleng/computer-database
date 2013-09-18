@@ -21,8 +21,6 @@ public class ComputerController extends HttpServlet {
 
 	private boolean first = true;
 
-	// private int currentPage = 1;
-
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -44,6 +42,16 @@ public class ComputerController extends HttpServlet {
 		int currentPage;
 		String valeurCherchee = request.getParameter("search");
 		int nbElements = 25;
+		int nbPage = 0;
+		
+		if(computerService.getComputerCount() % nbElements != 0){
+			nbPage = (computerService.getComputerCount() / nbElements) + 1;
+		}
+		else {
+			nbPage = computerService.getComputerCount() / nbElements;
+		}
+				
+		System.out.println("NOMBRE DE PAGES : " + nbPage);	
 
 		if (first) {
 			currentPage = 1;
@@ -58,8 +66,9 @@ public class ComputerController extends HttpServlet {
 			request.setAttribute("computers",
 					computerService.getComputersPages(nbElements, currentPage));
 			request.setAttribute("nPage", currentPage);
+			request.setAttribute("nbPages", nbPage);
 			request.setAttribute("computers_count", computerService.getComputerCount());
-			
+						
 			RequestDispatcher rd = getServletContext().getRequestDispatcher(
 					response.encodeURL("/WEB-INF/display.jsp"));
 			rd.forward(request, response);
