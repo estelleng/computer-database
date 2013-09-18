@@ -51,9 +51,15 @@
 			</tbody>
 		</table>
 	</form>
+	<c:if test="${nPage-1!=0}" >
+	
+		<a href="ComputerList?page=${nPage-1}">Précédent</a>
+		
+	</c:if>
+	
 	<jsp:element name="page">${nPage}</jsp:element>
 
-		<a href="ComputerList?page=${nPage+1}">Next</a></section>
+		<a href="ComputerList?page=${nPage+1}">Suivant</a></section>
 </body>
 <jsp:include page="../include/footer.jsp" />
 </html>
