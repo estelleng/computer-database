@@ -29,9 +29,9 @@ public class CompanyDaoImpl implements CompanyDao {
 		List<Company> companies = null;
 
 		try {
+			//Recuperation de l'EntityManager
 			em = DaoManager.INSTANCE.getEntityManager();
-			// Ici on appelle la namedQuery declaree en annotation dans la
-			// classe domain.User
+			//On cree et on execute la requete
 			String query = "Select c From Company c";
 			companies = em.createQuery(query).getResultList();
 		} catch (Exception e) {
@@ -50,9 +50,9 @@ public class CompanyDaoImpl implements CompanyDao {
 		Company company = null;
 
 		try {
+			//Recuperation de l'EntityManager
 			em = DaoManager.INSTANCE.getEntityManager();
-			// Ici on appelle la namedQuery declaree en annotation dans la
-			// classe domain.User
+			// On cree et on execute la requete ci-dessous
 			String query = "Select c From Company c WHERE c.id= :id";
 			company = (Company) em.createQuery(query)
 					.setParameter("id", companyId).getSingleResult();
@@ -80,15 +80,13 @@ public class CompanyDaoImpl implements CompanyDao {
 		try {
 			// Recuperation de l'entityManager qui gere la connexion a la BD
 			em = DaoManager.INSTANCE.getEntityManager();
-			// Debut de transaction (obligatoire pour des operations d'ecriture
-			// sur la BD)
+			// Debut de la transaction
 			em.getTransaction().begin();
 
-			// Sauvegarde de l'utilisateur
+			// Sauvegarde de la compagnie
 			em.persist(company);
 
-			// Commit de la transaction = on applique toutes les operations ci
-			// dessus
+			// Commit de la transaction
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();

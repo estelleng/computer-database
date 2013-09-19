@@ -25,6 +25,7 @@ public class ComputerDaoImpl implements ComputerDao {
 		List<Computer> computers = null;
 
 		try {
+			// Recuperation de l'EntityManager
 			em = DaoManager.INSTANCE.getEntityManager();
 
 			String query = "Select c From Computer c";
@@ -35,7 +36,6 @@ public class ComputerDaoImpl implements ComputerDao {
 			requete.setMaxResults((pageNumber + 1) * nbElementsPage);
 			computers = requete.getResultList();
 
-			// computers = em.createQuery(query).getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -49,17 +49,15 @@ public class ComputerDaoImpl implements ComputerDao {
 	public void create(Computer computer) {
 		EntityManager em = null;
 		try {
-			// Recuperation de l'entityManager qui gere la connexion a la BD
+			// Recuperation de l'EntityManager qui gere la connexion a la BD
 			em = DaoManager.INSTANCE.getEntityManager();
-			// Debut de transaction (obligatoire pour des operations d'ecriture
-			// sur la BD)
+			// Debut de la transaction
 			em.getTransaction().begin();
 
-			// Sauvegarde de l'utilisateur
+			// Sauvegarde de l'ordinateur
 			em.persist(computer);
 
-			// Commit de la transaction = on applique toutes les operations ci
-			// dessus
+			// Commit de la transaction
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -73,21 +71,23 @@ public class ComputerDaoImpl implements ComputerDao {
 	public void editComputer(Computer computer) {
 		EntityManager em = null;
 		try {
-			// Recuperation de l'entityManager qui gere la connexion a la BD
+			// Recuperation de l'EntityManager
 			em = DaoManager.INSTANCE.getEntityManager();
-			// Debut de transaction (obligatoire pour des operations d'ecriture
-			// sur la BD)
+
+			// Debut de la transaction
 			em.getTransaction().begin();
 
+			// On cherche l'ordinateur que l'on souhaite editer et on modifie
+			// les champs avec les infos saisies par l'utilisateur
 			Computer c = em.find(Computer.class, computer.getId());
 			c.setName(computer.getName());
 			c.setIntroduced(computer.getIntroduced());
 			c.setDiscontinued(computer.getDiscontinued());
 			c.setCompany(computer.getCompany());
 
-			// Commit de la transaction = on applique toutes les operations ci
-			// dessus
+			// Commit de la transaction
 			em.getTransaction().commit();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -99,19 +99,16 @@ public class ComputerDaoImpl implements ComputerDao {
 	public void deleteComputer(Computer computer) {
 		EntityManager em = null;
 		try {
-			// Recuperation de l'entityManager qui gere la connexion a la BD
+			// Recuperation de l'EntityManager
 			em = DaoManager.INSTANCE.getEntityManager();
-			// Debut de transaction (obligatoire pour des operations d'ecriture
-			// sur la BD)
+			// Debut de transaction
 			em.getTransaction().begin();
-
 			computer = em.merge(computer);
 
 			// Suppression de l'ordinateur
 			em.remove(computer);
 
-			// Commit de la transaction = on applique toutes les operations ci
-			// dessus
+			// Commit de la transaction
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -130,9 +127,10 @@ public class ComputerDaoImpl implements ComputerDao {
 		List<Computer> computersResearch = null;
 
 		try {
+			// Recuperation de l'EntityManager
 			em = DaoManager.INSTANCE.getEntityManager();
-			// Ici on appelle la namedQuery declaree en annotation dans la
-			// classe domain.User
+
+			// On cree et on execute la requete ci-dessous
 			String query = "Select c From Computer c WHERE c.name LIKE :name";
 			computersResearch = em.createQuery(query)
 					.setParameter("name", "%" + filter + "%").getResultList();
@@ -152,9 +150,10 @@ public class ComputerDaoImpl implements ComputerDao {
 		Computer computer = null;
 
 		try {
+			// Recuperation de l'EntityManager
 			em = DaoManager.INSTANCE.getEntityManager();
-			// Ici on appelle la namedQuery declaree en annotation dans la
-			// classe domain.User
+			
+			// On crée et on execute la requete ci-dessous
 			String query = "Select c From Computer c WHERE c.id= :id";
 			computer = (Computer) em.createQuery(query)
 					.setParameter("id", computerId).getSingleResult();
@@ -171,66 +170,67 @@ public class ComputerDaoImpl implements ComputerDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Computer> getComputersPages(int nbElements, int currentPage) {
-		
+
 		EntityManager em = null;
 
 		List<Computer> computers = null;
 
 		try {
+			//Recuperation de l'EntityManager
 			em = DaoManager.INSTANCE.getEntityManager();
-			
+
 			String query = "Select c From Computer c";
-			
+
 			Query requete = em.createQuery(query);
-			
-			if (currentPage == 1){
-				requete.setFirstResult(currentPage-1);
+
+			if (currentPage == 1) {
+				requete.setFirstResult(currentPage - 1);
 				requete.setMaxResults(nbElements);
-				
-			}
-			else {
-				
-				requete.setFirstResult((currentPage-1)*nbElements - 1);
+
+			} else {
+
+				requete.setFirstResult((currentPage - 1) * nbElements - 1);
 				requete.setMaxResults(nbElements);
 
 			}
-			
+
 			computers = requete.getResultList();
 
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(em != null)
+			if (em != null)
 				em.close();
 		}
-		return computers;	
+		return computers;
 
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	@Override
 	public int getComputerCount() {
-		
+
 		EntityManager em = null;
 
 		int count = 0;
 
 		try {
+			//Recuperation de l'EntityManager
 			em = DaoManager.INSTANCE.getEntityManager();
-			
+
 			String query = "Select c From Computer c";
-			
+			//On cree la requete
 			Query requete = em.createQuery(query);
-			
+
+			//On recupere le nombre d'ordinateurs
 			count = requete.getResultList().size();
 
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(em != null)
+			if (em != null)
 				em.close();
 		}
-		return count;	
+		return count;
 
 	}
 }

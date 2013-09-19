@@ -33,12 +33,10 @@ public class ComputerController extends HttpServlet {
 	 * @author estelle
 	 * 
 	 *         La methode doGet est executee lorsqu'un client execute l'URI
-	 *         UserServlet
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// Envoyer un objet dans la requete
-
+		
 		int currentPage;
 		String valeurCherchee = request.getParameter("search");
 		int nbElements = 25;
@@ -89,7 +87,7 @@ public class ComputerController extends HttpServlet {
 
 	/**
 	 * La methode doPost est executee lorsqu'un client poste des informations
-	 * (en general formulaire) sur l'URI UserServlet
+	 * (en general formulaire)
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {

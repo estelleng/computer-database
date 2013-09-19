@@ -84,25 +84,34 @@ public class AddComputerController extends HttpServlet {
 		}
 
 		String company_id = request.getParameter("company_id");
-		long companyId = Long.parseLong(company_id);
-
-		// Test de validite des champs login et password
+		
+		// Test de validite des champs entrés par l'utilisateur
 		if (validation) {
-			Company company = new Company();
-			company = companyService.getCompany(companyId);
+			//Si l'utilisateur a saisi une compagnie
+			if (!company_id.isEmpty()) {
+				long companyId = Long.parseLong(company_id);
+				Company company = new Company();
+				company = companyService.getCompany(companyId);
 
-			computerService.create(new Computer.Builder().name(name)
-					.introduced(introduced).discontinued(discontinued)
-					.company(company).build());
+				computerService.create(new Computer.Builder().name(name)
+						.introduced(introduced).discontinued(discontinued)
+						.company(company).build());
+			}
+
+			else {
+				computerService.create(new Computer.Builder().name(name)
+						.introduced(introduced).discontinued(discontinued)
+						.build());
+			}
+
 			// Redirection vers la page qui liste les ordinateurs
 			response.sendRedirect("ComputerList?page=1");
-
 		}
-		// si un des champs a été mal rempli, l'utilisateur est redirigé vers la
-		// page d'ajout d'un ordinateur.
+
+		// Si un des champs a été mal rempli, l'utilisateur est redirigé
+		// vers la page d'ajout d'un ordinateur.
 		else
 			response.sendRedirect("NewComputer");
 
 	}
-
 }

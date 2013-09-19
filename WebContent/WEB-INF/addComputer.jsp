@@ -32,12 +32,10 @@
 				<label for="company">Company Name:</label>
 				<div class="input">
 					<select name="company_id">
-					
+						<option value="${company.id}">Sélectionner la compagnie</option>
+						
 						<c:forEach items="${requestScope.companies}" var="company">
-
-							<option value = "${company.id}">${company.name}</option>
-
-
+							<option value="${company.id}">${company.name}</option>
 						</c:forEach>
 
 

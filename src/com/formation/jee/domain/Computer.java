@@ -70,6 +70,14 @@ public class Computer {
 		this.discontinued = discontinued;
 	}
 
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+
 	public static class Builder {
 		private Computer computer;
 
@@ -112,14 +120,6 @@ public class Computer {
 		return "Computer [id=" + id + ", name=" + name + ", introduced="
 				+ introduced + ", discontinued=" + discontinued
 				+ ", company_name=" + company.getName() + "]";
-	}
-
-	public Company getCompany() {
-		return company;
-	}
-
-	public void setCompany(Company company) {
-		this.company = company;
 	}
 
 }

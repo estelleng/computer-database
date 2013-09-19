@@ -43,11 +43,11 @@ public class DeleteComputerController extends HttpServlet {
 
 	/**
 	 * La methode doPost est executee lorsqu'un client poste des informations
-	 * (en general formulaire) sur l'URI UserServlet
+	 * (en general formulaire) sur l'URI
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
+		//On recupere l'id de l'ordinateur que l'utilisateur souhaite supprimer
 		String computer_id = request.getParameter("computer_id");
 		long computerId = Long.parseLong(computer_id);
 

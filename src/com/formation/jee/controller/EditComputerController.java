@@ -44,11 +44,13 @@ public class EditComputerController extends HttpServlet {
 		// Envoyer un objet dans la requete
 		request.setAttribute("companies", companyService.getCompanies());
 
+		//On recupere l'id de l'ordinateur que l'utilisateur souhaite modifier
 		computer_id = request.getParameter("id");
 		long computerId = Long.parseLong(computer_id);
-
 		Computer computer = new Computer();
 		computer = computerService.getComputer(computerId);
+		
+		//Envoyer un objet dans la requete
 		request.setAttribute("computer", computer);
 
 		RequestDispatcher rd = getServletContext().getRequestDispatcher(
@@ -59,7 +61,7 @@ public class EditComputerController extends HttpServlet {
 
 	/**
 	 * La methode doPost est executee lorsqu'un client poste des informations
-	 * (en general formulaire) sur l'URI UserServlet
+	 * (en general formulaire) 
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -102,7 +104,7 @@ public class EditComputerController extends HttpServlet {
 		long companyId = Long.parseLong(company_id);
 
 
-		// Si les champs ont été correctement remplis
+		// Si les champs ont été correctement remplis, on modifie les champs relatifs à l'ordinateur
 		if (validation) {
 			Company company = new Company();
 			company = companyService.getCompany(companyId);
@@ -119,7 +121,7 @@ public class EditComputerController extends HttpServlet {
 			response.sendRedirect("ComputerList?page=1");
 		}
 		
-		//si un des champs a été ma rempli, l'utilisateur est redirigé vers la page d'édition 
+		//Si un des champs a été mal rempli, l'utilisateur est redirigé vers la page d'édition 
 		//de l'ordinateur.
 		else response.sendRedirect("EditComputer?id="+ computerId);
 
