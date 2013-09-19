@@ -10,7 +10,12 @@ import com.formation.jee.dao.impl.CompanyDaoImpl;
 import com.formation.jee.dao.impl.ComputerDaoImpl;
 
 
-
+/**
+ * Classe qui permet de gérer les différents DAO associés aux différents objets du projet,
+ * à savoir les "computer" et les "company".
+ * @author Roxanne
+ *
+ */
 public enum DaoManager {
 
 	INSTANCE;

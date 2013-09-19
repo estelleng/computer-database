@@ -63,22 +63,27 @@ public class AddComputerController extends HttpServlet {
 
 		SimpleDateFormat sdf = null;
 		sdf = new SimpleDateFormat("yyyy-mm-dd");
+		//Permet les tests sur les formats de date
 		sdf.setLenient(false);
 
 		String introducedDate = request.getParameter("introducedDate");
 		Date introduced = null;
+		//Vérification de la date saisie
 		try {
 			introduced = (Date) sdf.parse(introducedDate);
 		} catch (ParseException e) {
+			//mauvaise saisie
 			validation = false;
 			e.printStackTrace();
 		}
 
 		String discontinuedDate = request.getParameter("discontinuedDate");
 		Date discontinued = null;
+		//Vérification de la date saisie
 		try {
 			discontinued = (Date) sdf.parse(discontinuedDate);
 		} catch (ParseException e) {
+			//mauvaise saisie
 			validation = false;
 			e.printStackTrace();
 		}

@@ -17,23 +17,26 @@ public class ComputerDaoImpl implements ComputerDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
+	/**
+	 * Cette méthode permet de récupérer la liste complète des ordinateurs,
+	 * de façon à pouvoir l'afficher, ou effectuer des traitements.
+	 * 
+	 * @return la liste totale des ordinateurs de la base de données
+	 */
 	public List<Computer> getComputers() {
 
 		EntityManager em = null;
-		int nbElementsPage = 25;
-		int pageNumber = 0;
+
 		List<Computer> computers = null;
 
 		try {
-			// Recuperation de l'EntityManager
+			// Récupération de l'EntityManager
 			em = DaoManager.INSTANCE.getEntityManager();
-
+			//Sélection de tous les ordinateurs
 			String query = "Select c From Computer c";
 
 			Query requete = em.createQuery(query);
 
-			requete.setFirstResult(pageNumber * nbElementsPage);
-			requete.setMaxResults((pageNumber + 1) * nbElementsPage);
 			computers = requete.getResultList();
 
 		} catch (Exception e) {
@@ -45,7 +48,12 @@ public class ComputerDaoImpl implements ComputerDao {
 		return computers;
 	}
 
-	@Override
+	/**
+	 * Cette méthode permet de créer un ordinateur et de l'ajouter à la base de données
+	 * 
+	 * @param computer l'élément "ordinateur" à créer
+	 */
+	@Override	
 	public void create(Computer computer) {
 		EntityManager em = null;
 		try {
@@ -66,7 +74,13 @@ public class ComputerDaoImpl implements ComputerDao {
 				em.close();
 		}
 	}
-
+	
+	/**
+	 * Cette méthode permet de modifier un ordinateur qui existe déjà dans la base de données
+	 * et de changer une ou plusieurs de ses informations associées
+	 * 
+	 * @param computer l'élément "ordinateur" à modifier
+	 */
 	@Override
 	public void editComputer(Computer computer) {
 		EntityManager em = null;
@@ -96,6 +110,11 @@ public class ComputerDaoImpl implements ComputerDao {
 		}
 	}
 
+	/**
+	 * Cette méthode permet de supprimer un ordinateur de la base de données
+	 * 
+	 * @param computer l'élément "ordinateur" à supprimer
+	 */
 	public void deleteComputer(Computer computer) {
 		EntityManager em = null;
 		try {
@@ -118,7 +137,14 @@ public class ComputerDaoImpl implements ComputerDao {
 		}
 
 	}
-
+	
+	/**
+	 * Cette méthode permet de récupérer les ordinateurs qui correspondent à un 
+	 * critère de recherche particulier
+	 * 
+	 * @param filter critère de recherche de l'ordinateur
+	 * @return la liste des ordinateurs correspondant à la recherche
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Computer> getComputersResearch(String filter) {
@@ -143,6 +169,13 @@ public class ComputerDaoImpl implements ComputerDao {
 		return computersResearch;
 	}
 
+	/**
+	 * Cette méthode permet de recher un ordinateur en particulier dans toute la base de données
+	 * à partir de son identifiant
+	 * 
+	 * @param computerId identifiant de l'ordinateur à récupérer
+	 * @return l'ordinateur recherché
+	 */
 	@Override
 	public Computer getComputer(long computerId) {
 		EntityManager em = null;
@@ -166,7 +199,14 @@ public class ComputerDaoImpl implements ComputerDao {
 		return computer;
 
 	}
-
+	
+	/**
+	 * Cette méthode permet de récupérer les ordinateurs associés à une page particulière
+	 * 
+	 * @param nbElements nombre d'éléments à afficher par page
+	 * @param currentPage page courante, ou numéro de la page dont il faut récupérer les ordinateurs
+	 * @return la liste des ordinateurs de la page
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Computer> getComputersPages(int nbElements, int currentPage) {
@@ -182,8 +222,10 @@ public class ComputerDaoImpl implements ComputerDao {
 			String query = "Select c From Computer c";
 
 			Query requete = em.createQuery(query);
-
+			
+			//Si on est positionné sur la première page
 			if (currentPage == 1) {
+				//Alors les ordinateurs à envoyer auront l'id qui va de 0 à nbElements
 				requete.setFirstResult(currentPage - 1);
 				requete.setMaxResults(nbElements);
 
@@ -206,6 +248,11 @@ public class ComputerDaoImpl implements ComputerDao {
 
 	}
 
+	/**
+	 * Méthode qui permet de récupérer le nombre total d'ordinateurs figurant dans la base de données.
+	 * 
+	 * @return le nombre d'ordinateurs existants
+	 */
 	@Override
 	public int getComputerCount() {
 

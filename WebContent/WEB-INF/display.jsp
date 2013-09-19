@@ -12,17 +12,24 @@
 <body>
 
 	<section id="main">
-	<h1>${requestScope.computers_count} Computers Found</h1>
+	
+	<!--Affichage du nombre d'ordinateurs figurant dans la liste-->
+	<h1>${requestScope.computers_count}Computers Found</h1>
+	
 	<div id="actions">
+	
 		<form action="" method="GET">
-			<input type="search" id="searchbox" name="search" value=""
-				placeholder="Search name"> <input type="submit"
-				id="searchsubmit" value="Filter by name" class="btn primary">
+		
+			<input type="search" id="searchbox" name="search" value="" placeholder="Search name"> 
+			<input type="submit" id="searchsubmit" value="Filter by name" class="btn primary">
+			
 		</form>
-		<a class="btn success" id="add" href="NewComputer">Add Computer</a> <a
-			class="btn success" id="delete" href="DeleteComputer">Delete
-			Computer</a>
+		
+		<a class="btn success" id="add" href="NewComputer">Add Computer</a>
+		<a class="btn success" id="delete" href="DeleteComputer">Delete	Computer</a>
+		
 	</div>
+	
 	<form action="ComputerServlet" method="POST">
 		<table class="computers zebra-striped">
 			<thead>
@@ -35,12 +42,16 @@
 				</tr>
 			</thead>
 			<tbody>
+				<!--Affichage de chaque ordinateur de la liste-->
 				<c:forEach items="${requestScope.computers}" var="computer">
 					<tr>
 						<td>${computer.id}</td>
-						<td><a
-							href="<c:url value="EditComputer?id=${computer.id}" />"
-							onclick="">${computer.name}</a></td>
+						<td>
+							<!--Le nom des ordinateurs est un lien vers la page
+							d'édition de l'ordinateur sélectionné -->
+							<a href="<c:url value="EditComputer?id=${computer.id}" />" 
+							onclick="">${computer.name}</a>
+						</td>
 
 						<td>${computer.introduced}</td>
 						<td>${computer.discontinued}</td>
@@ -51,19 +62,22 @@
 			</tbody>
 		</table>
 	</form>
+	
 	<ul class="pagination">
+		<!--Si la page courante n'est pas la première page, on affiche un lien vers la page précédente -->
 		<c:if test="${nPage-1 != 0}">
 
-			<li><a href="ComputerList?page=${nPage-1}">Précédent</a></li>
+			<li><a href="ComputerList?page=${nPage-1}">Previous</a></li>
 
 		</c:if>
-
+		
+		<!--Affichage du numéro de la page courante-->
 		<li><a href="ComputerList?page=${nPage}">${nPage}</a></li>
-
+		
+		<!--Si la page courante n'est pas la dernière page, on affiche un lien vers la page suivante -->
 		<c:if test="${nPage+1 <= nbPages}">
 
-			<li><a href="ComputerList?page=${nPage+1}">Suivant</a></li>
-
+			<li><a href="ComputerList?page=${nPage+1}">Next</a></li>
 
 		</c:if>
 	</ul>

@@ -76,16 +76,20 @@ public class EditComputerController extends HttpServlet {
 			//alors la saisie n'est pas valide
 			validation = false;
 		}
-
+		
+		
 		SimpleDateFormat sdf = null;
 		sdf = new SimpleDateFormat("yyyy-mm-dd");
+		//Permettra de faire des tests sur le format de date
 		sdf.setLenient(false);
 
 		String introducedDate = request.getParameter("introducedDate");
 		Date introduced = null;
+		//Vérification de la date saisie
 		try {
 			introduced = (Date) sdf.parse(introducedDate);
 		} catch (ParseException e) {
+			//Mauvaise saisie
 			validation = false;
 			e.printStackTrace();
 		}
@@ -93,9 +97,11 @@ public class EditComputerController extends HttpServlet {
 
 		String discontinuedDate = request.getParameter("discontinuedDate");
 		Date discontinued = null;
+		//Vérification de la date saisie
 		try {
 			discontinued = (Date) sdf.parse(discontinuedDate);
 		} catch (ParseException e) {
+			//Mauvaise saisie
 			validation = false;
 			e.printStackTrace();
 		}

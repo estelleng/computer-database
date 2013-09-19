@@ -30,41 +30,49 @@ public class ComputerController extends HttpServlet {
 	}
 
 	/**
-	 * @author estelle
-	 * 
-	 *         La methode doGet est executee lorsqu'un client execute l'URI
+	 * La methode doGet est exécutée lorsqu'un client exécute l'URI ComputerServlet.
+	 * Elle définit les actions associées à tous les clics actifs de la page.
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		
-		int currentPage;
-		String valeurCherchee = request.getParameter("search");
-		int nbElements = 25;
-		int nbPage = 0;
 		
+		int currentPage;
+		//Récupération de la valeur à chercher saisie par l'utilisateur
+		String valeurCherchee = request.getParameter("search");
+		//Définition à 25 du nombre d'ordinateurs à afficher par page
+		int nbElements = 25;
+		//Définition du nombre de pages.
+		int nbPages = 0;
+		
+		//Calcul du nombre de pages en fonction du nombre d'éléments à afficher et 
+		//du nombre total d'ordinateurs à afficher
 		if(computerService.getComputerCount() % nbElements != 0){
-			nbPage = (computerService.getComputerCount() / nbElements) + 1;
+			nbPages = (computerService.getComputerCount() / nbElements) + 1;
 		}
 		else {
-			nbPage = computerService.getComputerCount() / nbElements;
+			nbPages = computerService.getComputerCount() / nbElements;
 		}
-				
-		System.out.println("NOMBRE DE PAGES : " + nbPage);	
-
+	
+		//Si c'est la première fois qu'on atteint la page listant les ordinateurs, on se positionne
+		//sur la première page
 		if (first) {
 			currentPage = 1;
 			first = false;
 		} else {
+			//sinon on récupère la page courante
 			String page = request.getParameter("page");
 			currentPage = Integer.parseInt(page);
 		}
-
+		
+		//Si l'utilisateur n'a rien saisi dans le champ de recherche,
+		//on affiche tous les ordinateurs, avec un système de pagination
 		if (valeurCherchee == null || valeurCherchee.trim().isEmpty()) {
-
+			
 			request.setAttribute("computers",
 					computerService.getComputersPages(nbElements, currentPage));
 			request.setAttribute("nPage", currentPage);
-			request.setAttribute("nbPages", nbPage);
+			request.setAttribute("nbPages", nbPages);
 			request.setAttribute("computers_count", computerService.getComputerCount());
 						
 			RequestDispatcher rd = getServletContext().getRequestDispatcher(
@@ -72,7 +80,9 @@ public class ComputerController extends HttpServlet {
 			rd.forward(request, response);
 
 		}
-
+		
+		//sinon, si l'utilisateur a renseigné le champ de recherche, on affiche tous les éléments
+		//correspondant à la recherche
 		else if (valeurCherchee != null && !valeurCherchee.trim().isEmpty()) {
 
 			request.setAttribute("computers",

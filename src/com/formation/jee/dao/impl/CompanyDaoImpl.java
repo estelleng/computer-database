@@ -14,12 +14,11 @@ public class CompanyDaoImpl implements CompanyDao {
 
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Méthode qui permet de récupérer toutes les entreprises figurant dans la base de données.
 	 * 
-	 * @see com.formation.jee.dao.impl.CompanyDao#getCompanies()
+	 * @return la liste de toutes les entreprises
 	 */
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Company> getCompanies() {
@@ -42,7 +41,13 @@ public class CompanyDaoImpl implements CompanyDao {
 		}
 		return companies;
 	}
-
+	
+	/**
+	 * Méthode qui permet de récupérer une compagnie en particulier, en fonction de son identifiant.
+	 * 
+	 * @param companyId identifiant de l'entreprise à récupérer
+	 * @return l'objet "company" recherché
+	 */
 	@Override
 	public Company getCompany(long companyId) {
 		EntityManager em = null;
@@ -66,14 +71,11 @@ public class CompanyDaoImpl implements CompanyDao {
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.formation.jee.dao.impl.CompanyDao#create(com.formation.jee.domain
-	 * .Company)
+	/**
+	 *Méthode qui permet de créer une nouvelle entreprise et de l'ajouter dans la base de données.
+	 *
+	 * @param company l'objet "company" à créer et à ajouter à la base de données
 	 */
-
 	@Override
 	public void create(Company company) {
 		EntityManager em = null;

@@ -31,13 +31,11 @@ public class Computer {
 	@JoinColumn(name = "company_id", referencedColumnName = "id")
 	protected Company company;
 
-	// @Column(name = "company_id")
-	// private Integer company_id;
-
 	public Computer() {
 
 	}
 
+	//----------------Accesseurs et mutateurs-------------------------
 	public long getId() {
 		return id;
 	}
@@ -78,6 +76,11 @@ public class Computer {
 		this.company = company;
 	}
 
+	/**
+	 * Classe qui va permettre de faciliter la création d'instances de "Computer"
+	 * @author Roxanne
+	 *
+	 */
 	public static class Builder {
 		private Computer computer;
 

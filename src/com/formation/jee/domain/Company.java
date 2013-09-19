@@ -21,7 +21,8 @@ public class Company {
 	public Company() {
 
 	}
-
+	
+	//----------------Accesseurs et mutateurs-------------------------
 	public long getId() {
 		return id;
 	}
@@ -38,7 +39,11 @@ public class Company {
 		this.name = name;
 	}
 	
-	
+	/**
+	 * Classe qui va permettre de faciliter la création d'instances de "Company"
+	 * @author Roxanne
+	 *
+	 */
 
 	public static class Builder {
 		private Company company;
